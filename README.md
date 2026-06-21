@@ -55,8 +55,8 @@ Underneath, it's just Hugo — `hugo server` and `hugo --minify --gc` work fine 
 │   ├── CNAME                      # Custom domain (do not delete)
 │   ├── favicon.ico
 │   └── apple-touch-icon.png
-├── tools/
-│   └── invoice-template.html      # Printable invoice template (not published)
+├── static/private/invoice/
+│   └── index.html                 # Hidden printable invoice page (noindex, not linked anywhere)
 └── hugo.toml                      # All site config and tunables
 ```
 
@@ -156,13 +156,29 @@ In the Formspree dashboard, point the form's notification email at whatever inbo
 
 ---
 
-## Invoices
+## Invoices (private page)
 
-`tools/invoice-template.html` is a self-contained printable invoice. Open it in any browser, edit the customer name, dimensions, etc., and **Print → Save as PDF**. The totals recalculate live as you type.
+The invoice template lives at a **hidden URL** on the live site:
 
-It lives under `tools/` so Hugo doesn't publish it — it stays a private working file in the repo.
+```
+https://dunnwithlovequilting.com/private/invoice/
+```
 
-When you outgrow it (around 20+ invoices/month or when you want online payment links and customer history), [Wave](https://waveapps.com) is the natural next step — free forever for invoicing in the US.
+- Nothing on the site links to it.
+- It's not in `sitemap.xml` (it's a static file, not a content page).
+- The HTML carries `<meta name="robots" content="noindex, nofollow">`.
+- `robots.txt` includes `Disallow: /private/` so well-behaved crawlers skip it.
+
+It's "security through obscurity" — anyone with the URL can reach it, so don't share it. If you ever want stronger protection, the natural next step is moving the page to Cloudflare Pages or Netlify with a password gate. For now: just don't paste the URL in public.
+
+### Workflow
+
+1. Open the URL on any device (or run `./site.sh invoice` to open it locally via the dev server).
+2. Edit the contenteditable fields (customer, dimensions, notes, payment info).
+3. Totals recalculate live as you type.
+4. **Print → Save as PDF**. Email the PDF to your customer.
+
+When you outgrow this (around 20+ invoices/month, or when you want online payment links and saved customer history), [Wave](https://waveapps.com) is the natural next step — free forever for invoicing in the US.
 
 ---
 

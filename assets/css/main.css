@@ -148,7 +148,7 @@ a:hover { color: var(--text); }
 .page { padding: 3rem 1.25rem; }
 .page-header { margin-bottom: 2rem; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; }
 .page-subtitle { color: var(--text-muted); font-size: 1.1rem; }
-.page-body { max-width: 720px; margin: 0 auto; }
+.page-body { max-width: 1020px; margin: 0 auto; }
 .page-body h2 { margin-top: 2.2rem; }
 .page-body ul { padding-left: 1.25rem; }
 

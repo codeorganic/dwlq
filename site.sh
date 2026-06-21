@@ -40,7 +40,8 @@ COMMANDS
   preview      Production build, then serve ./public for a final look
   clean        Remove build artifacts (./public, ./resources, .hugo_build.lock)
   check        Clean build with broken-link warnings printed
-  invoice      Open the printable invoice template in your default browser
+  invoice      Open the (hidden) printable invoice page via the dev server
+  stop         Stop any background hugo server (started by 'invoice')
   install      One-time setup notes (Hugo install command + reminders)
   help         Show this message
 
@@ -106,14 +107,33 @@ cmd_check() {
 }
 
 cmd_invoice() {
-  local f="$PWD/tools/invoice-template.html"
-  [ -f "$f" ] || die "Invoice template not found at $f"
-  say "Opening $f"
+  local f="$PWD/static/private/invoice/index.html"
+  [ -f "$f" ] || die "Invoice page not found at $f"
+  local url="http://localhost:1313/private/invoice/"
+  if ! curl -fsS -o /dev/null "$url" 2>/dev/null; then
+    say "Dev server not detected on :1313 — starting it in the background"
+    nohup hugo server --port 1313 --bind 127.0.0.1 --disableFastRender >/tmp/quilt-hugo.log 2>&1 &
+    # wait briefly for the server to come up
+    for i in 1 2 3 4 5 6 7 8 9 10; do
+      sleep 0.5
+      curl -fsS -o /dev/null "$url" 2>/dev/null && break
+    done
+  fi
+  say "Opening $url"
   case "$OSTYPE" in
-    darwin*) open "$f" ;;
-    linux*)  xdg-open "$f" >/dev/null 2>&1 || die "xdg-open not available — open $f manually" ;;
-    *)       die "Unknown OS — open $f manually" ;;
+    darwin*) open "$url" ;;
+    linux*)  xdg-open "$url" >/dev/null 2>&1 || die "xdg-open not available — visit $url manually" ;;
+    *)       die "Unknown OS — visit $url manually" ;;
   esac
+  ok "When done, run: ./site.sh stop  (or close the terminal)"
+}
+
+cmd_stop() {
+  if pkill -f "hugo server" 2>/dev/null; then
+    ok "Stopped background hugo server."
+  else
+    say "No background hugo server running."
+  fi
 }
 
 # ---- dispatch ----
@@ -127,6 +147,7 @@ case "$cmd" in
   clean)              cmd_clean "$@" ;;
   check)              cmd_check "$@" ;;
   invoice|inv)        cmd_invoice "$@" ;;
+  stop)               cmd_stop "$@" ;;
   install|setup)      cmd_install "$@" ;;
   help|-h|--help|"")  cmd_help ;;
   *)                  printf '%s✗%s unknown command: %s\n\n' "$c_red" "$c_reset" "$cmd" >&2; cmd_help; exit 1 ;;
