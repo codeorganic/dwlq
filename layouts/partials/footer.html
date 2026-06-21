@@ -1,0 +1,21 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <p class="footer-name">{{ .Site.Title }}</p>
+      <p class="footer-tagline">Made with care in {{ .Site.Params.location }}</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <ul>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+        {{ with .Site.Params.instagramUrl }}{{ if ne . "https://instagram.com/REPLACE_ME" }}<li><a href="{{ . }}" rel="noopener" target="_blank">Instagram</a></li>{{ end }}{{ end }}
+        {{ with .Site.Params.pinterestUrl }}{{ if ne . "https://www.pinterest.com/REPLACE_ME/" }}<li><a href="{{ . }}" rel="noopener" target="_blank">Pinterest</a></li>{{ end }}{{ end }}
+      </ul>
+    </nav>
+    <p class="footer-copyright">
+      {{ $start := .Site.Params.copyrightYearStart | default now.Year }}
+      {{ $current := now.Year }}
+      © {{ if lt $start $current }}{{ $start }}–{{ $current }}{{ else }}{{ $current }}{{ end }} {{ .Site.Title }}. All rights reserved.
+    </p>
+  </div>
+</footer>

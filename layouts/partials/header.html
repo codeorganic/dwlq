@@ -1,0 +1,37 @@
+{{ $logo := resources.Get "images/logo.png" }}
+{{ $logoSmall := $logo.Resize "320x png" }}
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="{{ .Site.Title }} home">
+      <img src="{{ $logoSmall.RelPermalink }}"
+           width="{{ $logoSmall.Width }}"
+           height="{{ $logoSmall.Height }}"
+           alt="{{ .Site.Title }}">
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-controls="primary-menu" aria-expanded="false">
+        <span class="sr-only">Menu</span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <ul id="primary-menu" class="nav-menu">
+        {{ range .Site.Menus.main }}
+          {{ $active := or (eq $.RelPermalink .URL) (and (ne .URL "/") (hasPrefix $.RelPermalink .URL)) }}
+          <li><a href="{{ .URL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  </div>
+</header>
+<script>
+  (function () {
+    var btn = document.querySelector('.nav-toggle');
+    var menu = document.getElementById('primary-menu');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function () {
+      var open = menu.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  })();
+</script>

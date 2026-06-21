@@ -1,0 +1,54 @@
+baseURL = "https://dunnwithlovequilting.com/"
+languageCode = "en-us"
+title = "Dunn With Love Quilting"
+enableRobotsTXT = true
+enableEmoji = false
+
+[params]
+  description = "Free-motion longarm quilting in Des Moines, Washington. Serving quilters across Western Washington with personal, careful work and quick turnaround."
+  tagline = "Free-motion longarm quilting in Des Moines, WA"
+  location = "Des Moines, WA"
+  pricePerSqYd = 0.30
+  bindingAddOn = 10.0
+  turnaroundDays = 30
+  yearsExperience = 10
+  copyrightYearStart = 2026
+
+  # Third-party IDs — fill in after creating the accounts.
+  formspreeId = "mgojwyln"
+  lightwidgetId = "REPLACE_ME"
+  instagramUrl = "https://www.instagram.com/dunnwithlovequilting/"
+  pinterestUrl = "https://www.pinterest.com/REPLACE_ME/"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 20
+  [[menu.main]]
+    name = "Services"
+    url = "/services/"
+    weight = 30
+  [[menu.main]]
+    name = "Gallery"
+    url = "/gallery/"
+    weight = 40
+  [[menu.main]]
+    name = "Service Area"
+    url = "/service-area/"
+    weight = 50
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 60
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS"]

@@ -1,0 +1,25 @@
+{{- $isHome := .IsHome -}}
+{{- $title := cond $isHome .Site.Title (printf "%s — %s" .Title .Site.Title) -}}
+{{- $desc := cond (ne .Description "") .Description (cond $isHome .Site.Params.description (.Summary | plainify | truncate 155)) -}}
+{{- $img := absURL "images/og-default.png" -}}
+{{- with .Params.image -}}{{ $img = absURL . }}{{- end -}}
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<link rel="canonical" href="{{ .Permalink }}">
+
+<meta property="og:type" content="{{ if $isHome }}website{{ else }}article{{ end }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="{{ $img }}">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+<meta name="twitter:image" content="{{ $img }}">
+
+<meta name="pinterest-rich-pin" content="true">
+<meta property="article:author" content="{{ .Site.Title }}">
+{{ with .Site.Params.pinterestUrl }}{{ if ne . "https://www.pinterest.com/REPLACE_ME/" }}<meta property="og:see_also" content="{{ . }}">{{ end }}{{ end }}

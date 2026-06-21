@@ -1,0 +1,68 @@
+{{ $formId := .Site.Params.formspreeId }}
+<form class="contact-form" action="https://formspree.io/f/{{ $formId }}" method="POST" novalidate>
+  <p>
+    <label for="cf-name">Your name <span aria-hidden="true">*</span></label>
+    <input id="cf-name" name="name" type="text" autocomplete="name" required>
+  </p>
+
+  <p>
+    <label for="cf-email">Email <span aria-hidden="true">*</span></label>
+    <input id="cf-email" name="email" type="email" autocomplete="email" required>
+  </p>
+
+  <p>
+    <label for="cf-phone">Phone <span class="muted">(optional)</span></label>
+    <input id="cf-phone" name="phone" type="tel" autocomplete="tel">
+  </p>
+
+  <fieldset class="quilt-size">
+    <legend>Quilt size in inches <span aria-hidden="true">*</span></legend>
+    <p>
+      <label for="cf-width">Width</label>
+      <input id="cf-width" name="quilt_width_in" type="number" min="1" step="1" inputmode="numeric" required>
+    </p>
+    <p>
+      <label for="cf-length">Length</label>
+      <input id="cf-length" name="quilt_length_in" type="number" min="1" step="1" inputmode="numeric" required>
+    </p>
+  </fieldset>
+
+  <p class="checkbox-row">
+    <label>
+      <input type="checkbox" name="sew_on_binding" value="yes">
+      Add sew-on binding (+${{ printf "%.0f" .Site.Params.bindingAddOn }})
+    </label>
+  </p>
+
+  <p class="checkbox-row">
+    <label>
+      <input type="checkbox" name="first_time" value="yes">
+      This would be one of my first quilts with you (ask about intro pricing)
+    </label>
+  </p>
+
+  <p>
+    <label for="cf-notes">Project notes</label>
+    <textarea id="cf-notes" name="notes" rows="4" placeholder="Backing, batting, design ideas, deadlines, anything else…"></textarea>
+  </p>
+
+  <p class="checkbox-row">
+    <label>
+      <input type="checkbox" name="photo_release" value="yes">
+      I'm OK with photos of my finished quilt being shared on the {{ .Site.Title }} website and Instagram.
+    </label>
+  </p>
+
+  <p class="honeypot" aria-hidden="true">
+    <label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+  </p>
+
+  <input type="hidden" name="_subject" value="New quilting inquiry from {{ .Site.Title }}">
+
+  <p>
+    <button type="submit">Send my request</button>
+  </p>
+</form>
+{{ if eq $formId "REPLACE_ME" }}
+  <p class="form-warning"><strong>Heads up:</strong> the contact form's Formspree ID hasn't been set yet. Update <code>formspreeId</code> in <code>hugo.toml</code> before launch.</p>
+{{ end }}

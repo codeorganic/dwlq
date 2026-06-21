@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Invoice — Dunn With Love Quilting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg: #fdf8f3;
+      --bg-alt: #f5ede0;
+      --text: #4a3c3c;
+      --text-muted: #8a7a7a;
+      --accent: #c89b8b;
+      --accent-dark: #a37b6c;
+      --gold: #c9a96e;
+      --border: #e8dcc8;
+      --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: var(--sans); color: var(--text); background: #e8dcc8;
+      font-size: 14px; line-height: 1.55;
+    }
+    .toolbar {
+      max-width: 8.5in; margin: 1.25rem auto 0;
+      display: flex; gap: .75rem; justify-content: flex-end;
+      font-size: 13px;
+    }
+    .toolbar button {
+      background: var(--accent-dark); color: #fff; border: 0;
+      padding: .55rem 1rem; border-radius: 6px; font: inherit; font-weight: 600;
+      cursor: pointer;
+    }
+    .toolbar button:hover { background: #8b6557; }
+    .toolbar button.secondary { background: #fff; color: var(--accent-dark); border: 1px solid var(--accent); }
+
+    .invoice {
+      max-width: 8.5in; min-height: 11in;
+      margin: 1rem auto 2rem;
+      background: #fff; padding: .75in;
+      box-shadow: 0 6px 24px rgba(0,0,0,.12);
+    }
+    header.invoice-header {
+      display: grid; grid-template-columns: 1fr auto; gap: 1.5rem;
+      padding-bottom: 1.5rem; margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--accent);
+      align-items: flex-end;
+    }
+    .brand { display: flex; align-items: center; gap: .9rem; }
+    .brand img { width: 90px; height: auto; }
+    .brand-text { font-family: var(--serif); }
+    .brand-text .biz-name { font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
+    .brand-text .biz-tag {
+      font-size: .9rem; color: var(--text-muted); font-style: italic;
+      margin-top: .25rem;
+    }
+    .invoice-meta { text-align: right; font-size: .95rem; }
+    .invoice-meta .label { display: inline-block; color: var(--text-muted); min-width: 7em; }
+    .invoice-meta strong { color: var(--accent-dark); font-family: var(--serif); font-size: 1.1rem; letter-spacing: .04em; }
+    .invoice-meta .field { display: block; margin: .15rem 0; }
+
+    .parties {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .party h3 {
+      font-family: var(--serif); font-size: .9rem; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--accent-dark);
+      margin: 0 0 .35rem;
+    }
+    .party .lines { white-space: pre-line; }
+
+    /* Editable fields */
+    [contenteditable="true"] {
+      outline: none; border-radius: 3px; padding: 0 2px;
+      transition: background .15s;
+    }
+    [contenteditable="true"]:hover { background: #faf5ec; }
+    [contenteditable="true"]:focus { background: #fff5e0; box-shadow: 0 0 0 2px var(--gold); }
+
+    input.field-input, select.field-input {
+      font: inherit; color: inherit; background: transparent;
+      border: 0; border-bottom: 1px dashed var(--border);
+      padding: 0 2px; min-width: 4ch;
+      text-align: inherit;
+    }
+    input.field-input:focus, select.field-input:focus {
+      outline: none; border-bottom-color: var(--gold); background: #fff5e0;
+    }
+    input[type="number"].field-input { width: 5ch; text-align: right; }
+    input[type="number"].field-input::-webkit-inner-spin-button { opacity: .5; }
+
+    table.line-items {
+      width: 100%; border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+    table.line-items th {
+      text-align: left; padding: .55rem .5rem;
+      background: var(--bg-alt); border-bottom: 1px solid var(--border);
+      font-family: var(--serif); font-weight: 700; font-size: .95rem;
+    }
+    table.line-items th.num, table.line-items td.num { text-align: right; }
+    table.line-items td {
+      padding: .65rem .5rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .calc-hint {
+      display: block; color: var(--text-muted); font-size: .85rem; margin-top: .15rem;
+    }
+
+    .totals {
+      margin-left: auto; width: max-content; min-width: 280px;
+      font-size: .98rem;
+    }
+    .totals .row {
+      display: grid; grid-template-columns: 1fr auto; gap: 2rem;
+      padding: .35rem 0;
+    }
+    .totals .row.grand {
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 700;
+      border-top: 2px solid var(--accent);
+      margin-top: .25rem; padding-top: .6rem;
+      color: var(--accent-dark);
+    }
+    .totals .row.discount { color: var(--accent-dark); }
+    .totals .row.subtle { color: var(--text-muted); font-size: .9rem; }
+
+    .notes {
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;
+    }
+    .notes h3 {
+      font-family: var(--serif); font-size: .9rem; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--accent-dark);
+      margin: 0 0 .35rem;
+    }
+    .payment-info .lines { font-size: .92rem; }
+    .thank-you {
+      margin-top: 2rem; text-align: center;
+      font-family: var(--serif); font-style: italic;
+      color: var(--accent-dark); font-size: 1.1rem;
+    }
+
+    /* ---- Print ---- */
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .invoice {
+        box-shadow: none; margin: 0; padding: .5in;
+        min-height: auto; max-width: none;
+      }
+      [contenteditable="true"]:hover { background: transparent; }
+      input.field-input, select.field-input {
+        border-bottom: 0; background: transparent;
+      }
+      a { color: inherit; text-decoration: none; }
+    }
+
+    @page { margin: .5in; }
+  </style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button type="button" onclick="window.print()">🖨 Save as PDF / Print</button>
+  <button type="button" class="secondary" onclick="resetForm()">Reset to blank</button>
+</div>
+
+<article class="invoice" id="invoice">
+
+  <header class="invoice-header">
+    <div class="brand">
+      <img src="../assets/images/logo.png" alt="Dunn With Love Quilting">
+      <div class="brand-text">
+        <div class="biz-name">Dunn With Love Quilting</div>
+        <div class="biz-tag">Free-motion longarm quilting</div>
+        <div class="biz-tag" contenteditable="true">Des Moines, WA · dunnwithlovequilting.com</div>
+      </div>
+    </div>
+    <div class="invoice-meta">
+      <div class="field"><strong>INVOICE</strong></div>
+      <div class="field"><span class="label">Invoice #</span><input class="field-input" type="text" id="inv-number" value="2026-001" style="width:8ch;text-align:right"></div>
+      <div class="field"><span class="label">Date</span><input class="field-input" type="date" id="inv-date" style="width:13ch"></div>
+      <div class="field"><span class="label">Due</span><input class="field-input" type="text" id="inv-due" value="Upon receipt" style="width:12ch"></div>
+    </div>
+  </header>
+
+  <section class="parties">
+    <div class="party">
+      <h3>Bill To</h3>
+      <div class="lines" contenteditable="true">Customer Name
+Street Address
+City, ST  ZIP
+phone · email</div>
+    </div>
+    <div class="party">
+      <h3>Project</h3>
+      <div class="lines" contenteditable="true">Quilt description (e.g., "Lap-size star quilt, cream &amp; sage")
+Received: <em>date</em>
+Returned: <em>date</em></div>
+    </div>
+  </section>
+
+  <table class="line-items">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th class="num">Width (in)</th>
+        <th class="num">Length (in)</th>
+        <th class="num">Sq yd</th>
+        <th class="num">Rate</th>
+        <th class="num">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Free-motion longarm quilting
+          <span class="calc-hint" id="sqyd-hint">— enter dimensions →</span>
+        </td>
+        <td class="num"><input class="field-input" type="number" min="1" step="1" id="q-width" value="60"></td>
+        <td class="num"><input class="field-input" type="number" min="1" step="1" id="q-length" value="80"></td>
+        <td class="num" id="q-sqyd">3.70</td>
+        <td class="num">$<input class="field-input" type="number" min="0" step="0.01" id="q-rate" value="0.30" style="width:6ch"></td>
+        <td class="num" id="q-amount">$1.11</td>
+      </tr>
+      <tr id="binding-row">
+        <td>
+          <label><input type="checkbox" id="binding-check" checked> Sew-on binding</label>
+        </td>
+        <td class="num" colspan="3">—</td>
+        <td class="num">$<input class="field-input" type="number" min="0" step="1" id="binding-fee" value="10" style="width:5ch"></td>
+        <td class="num" id="binding-amount">$10.00</td>
+      </tr>
+      <tr>
+        <td contenteditable="true">Additional notes (batting, backing prep, rush, etc.) — delete this row if unused</td>
+        <td class="num" colspan="4">$<input class="field-input" type="number" min="0" step="0.01" id="extra-fee" value="0" style="width:6ch"></td>
+        <td class="num" id="extra-amount">$0.00</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="totals">
+    <div class="row"><span>Subtotal</span><span id="sub-total">$11.11</span></div>
+    <div class="row discount">
+      <span>
+        Discount
+        <input class="field-input" type="text" id="discount-label" value="(intro pricing)" style="width:14ch">
+      </span>
+      <span>– $<input class="field-input" type="number" min="0" step="0.01" id="discount-amt" value="0" style="width:6ch;text-align:right"></span>
+    </div>
+    <div class="row subtle">
+      <span>WA sales tax (services exempt)</span>
+      <span>$0.00</span>
+    </div>
+    <div class="row grand"><span>Total Due</span><span id="grand-total">$11.11</span></div>
+  </div>
+
+  <section class="notes">
+    <div class="thank-you-block">
+      <h3>Thank you</h3>
+      <p contenteditable="true">Thanks so much for trusting me with your quilt. Please reach out any time with questions about this invoice or future projects.</p>
+    </div>
+    <div class="payment-info">
+      <h3>Payment</h3>
+      <div class="lines" contenteditable="true">Venmo: @your-handle
+Zelle: your-phone-or-email
+Check payable to: <em>Your Name</em>
+
+Cash on pickup welcome.</div>
+    </div>
+  </section>
+
+  <p class="thank-you">— Dunn With Love —</p>
+</article>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const fmt = (n) => '$' + n.toFixed(2);
+
+  function recalc() {
+    const w = parseFloat($('q-width').value) || 0;
+    const l = parseFloat($('q-length').value) || 0;
+    const rate = parseFloat($('q-rate').value) || 0;
+    const bindingChecked = $('binding-check').checked;
+    const bindingFee = parseFloat($('binding-fee').value) || 0;
+    const extra = parseFloat($('extra-fee').value) || 0;
+    const discount = parseFloat($('discount-amt').value) || 0;
+
+    const sqyd = (w * l) / 1296;
+    const quiltingAmt = sqyd * rate;
+
+    $('q-sqyd').textContent = sqyd.toFixed(2);
+    $('sqyd-hint').textContent = `${w}" × ${l}" = ${sqyd.toFixed(2)} sq yd`;
+    $('q-amount').textContent = fmt(quiltingAmt);
+
+    const bindingAmt = bindingChecked ? bindingFee : 0;
+    $('binding-amount').textContent = bindingChecked ? fmt(bindingAmt) : '—';
+    $('binding-row').style.opacity = bindingChecked ? '1' : '.45';
+
+    $('extra-amount').textContent = fmt(extra);
+
+    const subtotal = quiltingAmt + bindingAmt + extra;
+    $('sub-total').textContent = fmt(subtotal);
+
+    const total = Math.max(0, subtotal - discount);
+    $('grand-total').textContent = fmt(total);
+  }
+
+  // Default the date to today on first load.
+  (function initDate() {
+    const d = new Date();
+    const iso = d.toISOString().slice(0, 10);
+    if (!$('inv-date').value) $('inv-date').value = iso;
+  })();
+
+  document.querySelectorAll('input.field-input, #binding-check').forEach(el => {
+    el.addEventListener('input', recalc);
+    el.addEventListener('change', recalc);
+  });
+
+  function resetForm() {
+    if (!confirm('Reset every field on this invoice?')) return;
+    document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+      // Restore original placeholder text by reloading the page.
+    });
+    location.reload();
+  }
+
+  recalc();
+</script>
+</body>
+</html>

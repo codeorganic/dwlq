@@ -1,0 +1,41 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="container hero-inner">
+    <h1>{{ .Site.Title }}</h1>
+    <p class="hero-tagline">{{ .Site.Params.tagline }}</p>
+    <p class="hero-sub">{{ .Site.Params.yearsExperience }} years of experience. All free-motion. Currently booking with under {{ .Site.Params.turnaroundDays }}-day turnaround.</p>
+    <p class="hero-actions">
+      <a class="btn btn-primary" href="/contact/">Request quilting time</a>
+      <a class="btn btn-link" href="/services/">See pricing</a>
+    </p>
+  </div>
+</section>
+
+<section class="highlights container">
+  <ul class="highlights-grid">
+    <li>
+      <h2>{{ .Site.Params.yearsExperience }}+ years</h2>
+      <p>Free-motion longarm experience, with time on the floor at local quilt shops too.</p>
+    </li>
+    <li>
+      <h2>${{ printf "%.2f" .Site.Params.pricePerSqYd }} / sq yd</h2>
+      <p>All free-motion quilting. Add sew-on binding for ${{ printf "%.0f" .Site.Params.bindingAddOn }}.</p>
+    </li>
+    <li>
+      <h2>&lt; {{ .Site.Params.turnaroundDays }}-day turnaround</h2>
+      <p>Quick and careful — your quilt isn't sitting in a queue for months.</p>
+    </li>
+    <li>
+      <h2>Intro pricing</h2>
+      <p>First three quilts get a special rate while I build out the portfolio.</p>
+    </li>
+  </ul>
+</section>
+
+<section class="container featured-work">
+  <h2>Recent work</h2>
+  <p class="section-lead">A live feed from <a href="{{ .Site.Params.instagramUrl }}" rel="noopener" target="_blank">Instagram</a> — scroll to see what's just come off the longarm.</p>
+  {{ partial "lightwidget-embed.html" (dict "ctx" . "height" "380") }}
+  <p class="featured-cta"><a class="btn btn-link" href="/gallery/">View the full gallery →</a></p>
+</section>
+{{ end }}

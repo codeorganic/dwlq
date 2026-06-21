@@ -1,0 +1,20 @@
+{{- /* expects a dict: ctx (Page), id (optional), height (optional, string) */ -}}
+{{- $ctx := .ctx -}}
+{{- $id := .id | default $ctx.Site.Params.lightwidgetId -}}
+{{- $height := .height | default "450" -}}
+{{- if and $id (ne $id "REPLACE_ME") -}}
+<div class="lightwidget-wrapper">
+  <iframe src="//lightwidget.com/widgets/{{ $id }}.html"
+          scrolling="no"
+          allowtransparency="true"
+          class="lightwidget-widget"
+          style="width:100%;border:0;overflow:hidden;height:{{ $height }}px"
+          title="Instagram feed for {{ $ctx.Site.Title }}"
+          loading="lazy">
+  </iframe>
+</div>
+{{- else -}}
+<p class="lightwidget-placeholder">
+  Instagram feed will appear here once the LightWidget ID is configured in <code>hugo.toml</code>.
+</p>
+{{- end -}}

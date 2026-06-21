@@ -1,0 +1,48 @@
+{{- $logo := absURL "images/logo.png" -}}
+{{- $price := printf "%.2f" (.Site.Params.pricePerSqYd | float) -}}
+{{- $binding := printf "%.2f" (.Site.Params.bindingAddOn | float) -}}
+{{- $sameAs := slice -}}
+{{- with .Site.Params.instagramUrl -}}{{- if ne . "https://instagram.com/REPLACE_ME" -}}{{- $sameAs = $sameAs | append . -}}{{- end -}}{{- end -}}
+{{- with .Site.Params.pinterestUrl -}}{{- if ne . "https://www.pinterest.com/REPLACE_ME/" -}}{{- $sameAs = $sameAs | append . -}}{{- end -}}{{- end -}}
+{{- $data := dict
+  "@context" "https://schema.org"
+  "@type" "LocalBusiness"
+  "name" .Site.Title
+  "image" $logo
+  "url" .Site.BaseURL
+  "priceRange" "$"
+  "address" (dict
+    "@type" "PostalAddress"
+    "addressLocality" "Des Moines"
+    "addressRegion" "WA"
+    "addressCountry" "US"
+  )
+  "areaServed" (dict
+    "@type" "AdministrativeArea"
+    "name" "Western Washington, USA"
+  )
+  "makesOffer" (slice
+    (dict
+      "@type" "Offer"
+      "name" "Longarm Free-Motion Quilting"
+      "price" $price
+      "priceCurrency" "USD"
+      "priceSpecification" (dict
+        "@type" "UnitPriceSpecification"
+        "price" $price
+        "priceCurrency" "USD"
+        "unitText" "square yard"
+      )
+    )
+    (dict
+      "@type" "Offer"
+      "name" "Sew-On Binding Add-On"
+      "price" $binding
+      "priceCurrency" "USD"
+    )
+  )
+-}}
+{{- if gt (len $sameAs) 0 -}}{{- $data = merge $data (dict "sameAs" $sameAs) -}}{{- end -}}
+<script type="application/ld+json">
+{{ $data | jsonify (dict "indent" "  ") | safeJS }}
+</script>
