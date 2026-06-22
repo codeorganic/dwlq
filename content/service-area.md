@@ -4,7 +4,7 @@ subtitle: "Serving Western Washington from Des Moines."
 description: "Dunn With Love Quilting is based in Des Moines, WA, and serves quilters across Western Washington — from Olympia to Bellingham — by drop-off, pick-up, or shipping."
 ---
 
-I'm based in **Des Moines, Washington**, just south of Seattle. The shop serves quilters across **Western Washington** — anywhere from Olympia up through Bellingham, including the greater Seattle and Tacoma metro areas, the Eastside, and the Kitsap and Olympic peninsulas. If you're further out, shipping works beautifully and I've returned quilts all over the region.
+I'm based in **Des Moines, Washington**, just south of Seattle.
 
 ## How to get your quilt to me
 

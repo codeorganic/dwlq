@@ -6,7 +6,7 @@ description: "A live Instagram feed of recent quilting projects from Dunn With L
 
 This is the live Instagram feed — scroll to see the most recent quilts. For older work, head over to the full account.
 
-{{< lightwidget height="900" >}}
+{{< lightwidget height="1100" >}}
 
 <p style="text-align:center;margin-top:1.5rem;">
   <a class="btn btn-link" href="https://instagram.com/" target="_blank" rel="noopener">View full feed on Instagram →</a>

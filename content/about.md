@@ -12,8 +12,7 @@ Every quilt I take on gets **free-motion quilting** designed for your top: the p
 
 - **Drop off in person** or ship your quilt top, backing, and batting to me.
 - We talk about the design — heirloom, edge-to-edge, something custom. I can sketch options.
-- I quilt it, trim it, and (if you'd like) attach the binding for hand-finishing.
-- Pickup or return shipping within about thirty days, usually sooner.
+- Pickup or return shipping within about {{ .Site.Params.turnaroundDays }} days, usually sooner.
 
 ## A note on the business
 

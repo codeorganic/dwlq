@@ -11,6 +11,7 @@ enableEmoji = false
   priceEdgeToEdgePerSqIn = 0.03
   priceCustomPerSqIn = 0.10
   bindingAddOn = 10.0
+  battingAddOn = 20.0
   turnaroundDays = 14
   copyrightYearStart = 2026
 

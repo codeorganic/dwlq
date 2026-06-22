@@ -10,31 +10,36 @@ Every quilt is free-motion. You choose the style: an **edge-to-edge** design tha
 
 ## Edge-to-edge vs. custom — which one?
 
-- **Edge-to-edge** is one beautiful design repeated across the entire quilt. It's the best value, fastest turnaround, and looks lovely on almost anything — especially modern, scrappy, and utility quilts.
-- **Custom** treats each section of your quilt differently: feathers in the borders, motifs in the blocks, background fills between. Best for show quilts, heirlooms, and quilts where the piecing deserves to shine.
+- **Edge-to-edge** is one beautiful design repeated across the entire quilt. It's the best value, fastest turnaround, and looks lovely on almost anything.
+- **Custom** treats each section of your quilt differently: feathers in the borders, motifs in the blocks, background fills between. Fantastic option for applique, embroidery and pieced quilts where piecing deserves to shine.
 
 If you're not sure which fits your project, just tell me about it on the contact form and I'll recommend an approach.
 
 ## What's included
 
-- **Consultation.** We talk through the design before I load your top. You'll know what to expect.
-- **Free-motion quilting** in cotton or polyester thread, your choice of color.
-- **Trim** to size when finished.
-- **Photos** of the finished work, with your permission.
+- **Consultation** We talk through the design before I load your top. You'll know what to expect.
+- **Free-motion quilting** Your choice of thread color.
 
 ## Add-ons
 
-- **Sew-on binding** — I'll machine-attach binding (your fabric or mine) so it's ready for you to hand-finish on the back. Many quilters love saving this step.
-- **Backing prep, batting, special thread, oversized quilts** — happy to quote; just ask.
+- **Sew-on binding** — I'll machine-attach your binding so it's ready for you to hand-finish on the back.
+- **Backing prep, batting, special thread** — happy to quote; just ask.
+- **Batting** - Bring your own, or you can purchase. 
 
 ## What I'd love to know up front
 
 When you fill out the contact form, the more you can tell me about your project, the better:
 
 - Width × length in inches (or roughly — I'll confirm before quilting).
-- Quilt size category (lap, twin, queen, king).
-- Edge-to-edge or custom — or "not sure, let's talk."
+- Edge-to-edge or custom.
 - Any deadlines (a birthday, a baby, a wedding).
-- Whether you'd like the quilting to be dense, medium, or open.
+- Specific ideas you have thought about or thread color.
+
+## How to prepare your quilt
+
+- 4 extra inches around the quilt top.
+- Quilts with a lot of bias edges will benefit from a stay stitch around the edge.
+- Binding addon should be pieced and ironed in half.
+
 
 Ready? **[Tell me about your quilt →](/contact/)**
