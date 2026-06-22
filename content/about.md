@@ -1,10 +1,10 @@
 ---
 title: "About"
 subtitle: "A decade of quilting, finished one stitch at a time."
-description: "Meet the quilter behind Dunn With Love Quilting — 10+ years of free-motion longarm experience, with time spent working at local quilt shops too."
+description: "Meet the quilter behind Dunn With Love Quilting — free-motion longarm quilting in Des Moines, WA, with time spent working at local quilt shops too."
 ---
 
-I've been quilting for more than ten years and worked at quilt shops along the way, which means I've seen a lot of quilts come and go — and I know how much love goes into each one before it lands on a longarm.
+I've been quilting for a long while and worked at quilt shops along the way, which means I've seen a lot of quilts come and go — and I know how much love goes into each one before it lands on a longarm.
 
 Every quilt I take on gets **free-motion quilting** designed for your top: the pattern, the density, and the thread are chosen to make your piecing sing rather than fight with it. I am one person, working out of Des Moines, Washington, and I treat each quilt like it belongs to a friend.
 

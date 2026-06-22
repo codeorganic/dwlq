@@ -12,7 +12,6 @@ enableEmoji = false
   priceCustomPerSqIn = 0.10
   bindingAddOn = 10.0
   turnaroundDays = 30
-  yearsExperience = 10
   copyrightYearStart = 2026
 
   # Third-party IDs — fill in after creating the accounts.

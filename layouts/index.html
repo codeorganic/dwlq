@@ -3,7 +3,7 @@
   <div class="container hero-inner">
     <h1>{{ .Site.Title }}</h1>
     <p class="hero-tagline">{{ .Site.Params.tagline }}</p>
-    <p class="hero-sub">{{ .Site.Params.yearsExperience }} years of experience. All free-motion. Currently booking with under {{ .Site.Params.turnaroundDays }}-day turnaround.</p>
+    <p class="hero-sub">All free-motion. Currently booking with a turnaround of less than {{ .Site.Params.turnaroundDays }} days.</p>
     <p class="hero-actions">
       <a class="btn btn-primary" href="/contact/">Request quilting time</a>
       <a class="btn btn-link" href="/services/">See pricing</a>
@@ -14,16 +14,16 @@
 <section class="highlights container">
   <ul class="highlights-grid">
     <li>
-      <h2>{{ .Site.Params.yearsExperience }}+ years</h2>
-      <p>Free-motion longarm experience, with time on the floor at local quilt shops too.</p>
+      <h2>All free-motion</h2>
+      <p>Edge-to-edge and custom designs, every quilt treated like it belongs to a friend.</p>
     </li>
     <li>
       <h2>From ${{ printf "%.2f" .Site.Params.priceEdgeToEdgePerSqIn }}/sq in</h2>
-      <p>Edge-to-edge from ${{ printf "%.2f" .Site.Params.priceEdgeToEdgePerSqIn }}, custom from ${{ printf "%.2f" .Site.Params.priceCustomPerSqIn }} — both all free-motion.</p>
+      <p>Edge-to-edge from ${{ printf "%.2f" .Site.Params.priceEdgeToEdgePerSqIn }}, custom from ${{ printf "%.2f" .Site.Params.priceCustomPerSqIn }} — both free-motion.</p>
     </li>
     <li>
-      <h2>&lt; {{ .Site.Params.turnaroundDays }}-day turnaround</h2>
-      <p>Quick and careful — your quilt isn't sitting in a queue for months.</p>
+      <h2>Under {{ .Site.Params.turnaroundDays }} days</h2>
+      <p>Current turnaround. Your quilt isn't sitting in a queue for months.</p>
     </li>
     <li>
       <h2>Intro pricing</h2>
