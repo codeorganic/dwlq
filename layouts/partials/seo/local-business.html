@@ -1,5 +1,6 @@
 {{- $logo := absURL "images/logo.png" -}}
-{{- $price := printf "%.2f" (.Site.Params.pricePerSqYd | float) -}}
+{{- $priceE2E := printf "%.2f" (.Site.Params.priceEdgeToEdgePerSqIn | float) -}}
+{{- $priceCustom := printf "%.2f" (.Site.Params.priceCustomPerSqIn | float) -}}
 {{- $binding := printf "%.2f" (.Site.Params.bindingAddOn | float) -}}
 {{- $sameAs := slice -}}
 {{- with .Site.Params.instagramUrl -}}{{- if ne . "https://instagram.com/REPLACE_ME" -}}{{- $sameAs = $sameAs | append . -}}{{- end -}}{{- end -}}
@@ -24,14 +25,26 @@
   "makesOffer" (slice
     (dict
       "@type" "Offer"
-      "name" "Longarm Free-Motion Quilting"
-      "price" $price
+      "name" "Edge-to-Edge Free-Motion Quilting"
+      "price" $priceE2E
       "priceCurrency" "USD"
       "priceSpecification" (dict
         "@type" "UnitPriceSpecification"
-        "price" $price
+        "price" $priceE2E
         "priceCurrency" "USD"
-        "unitText" "square yard"
+        "unitText" "square inch"
+      )
+    )
+    (dict
+      "@type" "Offer"
+      "name" "Custom Free-Motion Quilting"
+      "price" $priceCustom
+      "priceCurrency" "USD"
+      "priceSpecification" (dict
+        "@type" "UnitPriceSpecification"
+        "price" $priceCustom
+        "priceCurrency" "USD"
+        "unitText" "square inch"
       )
     )
     (dict

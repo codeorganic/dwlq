@@ -203,6 +203,13 @@ a:hover { color: var(--text); }
 }
 .contact-form fieldset.quilt-size legend { grid-column: 1 / -1; font-weight: 600; font-size: .95rem; }
 .contact-form fieldset.quilt-size p { margin: 0; }
+.contact-form fieldset.quilt-style {
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 1rem; margin: 0 0 1rem;
+}
+.contact-form fieldset.quilt-style legend { font-weight: 600; font-size: .95rem; }
+.contact-form fieldset.quilt-style p { margin: 0 0 .35rem; }
+.contact-form fieldset.quilt-style p:last-child { margin-bottom: 0; }
 .contact-form .checkbox-row label {
   display: flex; gap: .5rem; align-items: flex-start; font-weight: 400;
 }

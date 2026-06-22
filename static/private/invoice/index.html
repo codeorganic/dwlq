@@ -260,7 +260,7 @@ Returned: <em>date</em></div>
         <th>Description</th>
         <th class="num">Width (in)</th>
         <th class="num">Length (in)</th>
-        <th class="num">Sq yd</th>
+        <th class="num">Sq in</th>
         <th class="num">Rate</th>
         <th class="num">Amount</th>
       </tr>
@@ -268,14 +268,17 @@ Returned: <em>date</em></div>
     <tbody>
       <tr>
         <td>
-          Free-motion longarm quilting
-          <span class="calc-hint" id="sqyd-hint">— enter dimensions →</span>
+          <select class="field-input" id="q-style" style="width:auto">
+            <option value="0.03">Edge-to-edge quilting</option>
+            <option value="0.10">Custom quilting</option>
+          </select>
+          <span class="calc-hint" id="sqin-hint">— enter dimensions →</span>
         </td>
         <td class="num"><input class="field-input" type="number" min="1" step="1" id="q-width" value="60"></td>
         <td class="num"><input class="field-input" type="number" min="1" step="1" id="q-length" value="80"></td>
-        <td class="num" id="q-sqyd">3.70</td>
-        <td class="num">$<input class="field-input" type="number" min="0" step="0.01" id="q-rate" value="0.30" style="width:6ch"></td>
-        <td class="num" id="q-amount">$1.11</td>
+        <td class="num" id="q-sqin">4,800</td>
+        <td class="num">$<input class="field-input" type="number" min="0" step="0.01" id="q-rate" value="0.03" style="width:6ch"></td>
+        <td class="num" id="q-amount">$144.00</td>
       </tr>
       <tr id="binding-row">
         <td>
@@ -340,11 +343,12 @@ Cash on pickup welcome.</div>
     const extra = parseFloat($('extra-fee').value) || 0;
     const discount = parseFloat($('discount-amt').value) || 0;
 
-    const sqyd = (w * l) / 1296;
-    const quiltingAmt = sqyd * rate;
+    const sqin = w * l;
+    const quiltingAmt = sqin * rate;
+    const sqinFmt = sqin.toLocaleString('en-US');
 
-    $('q-sqyd').textContent = sqyd.toFixed(2);
-    $('sqyd-hint').textContent = `${w}" × ${l}" = ${sqyd.toFixed(2)} sq yd`;
+    $('q-sqin').textContent = sqinFmt;
+    $('sqin-hint').textContent = `${w}" × ${l}" = ${sqinFmt} sq in`;
     $('q-amount').textContent = fmt(quiltingAmt);
 
     const bindingAmt = bindingChecked ? bindingFee : 0;
@@ -366,6 +370,12 @@ Cash on pickup welcome.</div>
     const iso = d.toISOString().slice(0, 10);
     if (!$('inv-date').value) $('inv-date').value = iso;
   })();
+
+  // Changing the style select auto-fills the rate to match.
+  $('q-style').addEventListener('change', (e) => {
+    $('q-rate').value = e.target.value;
+    recalc();
+  });
 
   document.querySelectorAll('input.field-input, #binding-check').forEach(el => {
     el.addEventListener('input', recalc);

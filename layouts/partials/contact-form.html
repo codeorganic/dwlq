@@ -27,6 +27,28 @@
     </p>
   </fieldset>
 
+  <fieldset class="quilt-style">
+    <legend>Quilting style</legend>
+    <p class="checkbox-row">
+      <label>
+        <input type="radio" name="quilting_style" value="edge_to_edge" checked>
+        Edge-to-edge (${{ printf "%.2f" .Site.Params.priceEdgeToEdgePerSqIn }} / sq in)
+      </label>
+    </p>
+    <p class="checkbox-row">
+      <label>
+        <input type="radio" name="quilting_style" value="custom">
+        Custom (${{ printf "%.2f" .Site.Params.priceCustomPerSqIn }} / sq in)
+      </label>
+    </p>
+    <p class="checkbox-row">
+      <label>
+        <input type="radio" name="quilting_style" value="unsure">
+        Not sure yet — I'd like to talk it through
+      </label>
+    </p>
+  </fieldset>
+
   <p class="checkbox-row">
     <label>
       <input type="checkbox" name="sew_on_binding" value="yes">

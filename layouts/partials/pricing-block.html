@@ -1,9 +1,14 @@
 <section class="pricing" aria-label="Pricing">
   <div class="pricing-grid">
     <article class="price-card">
-      <h3>Longarm Quilting</h3>
-      <p class="price">${{ printf "%.2f" .Site.Params.pricePerSqYd }}<span class="price-unit"> / sq yd</span></p>
-      <p>All free-motion. Custom designs to suit your quilt top.</p>
+      <h3>Edge-to-Edge</h3>
+      <p class="price">${{ printf "%.2f" .Site.Params.priceEdgeToEdgePerSqIn }}<span class="price-unit"> / sq in</span></p>
+      <p>An all-over free-motion design that flows across the whole quilt. Great value, beautiful texture, fast turnaround.</p>
+    </article>
+    <article class="price-card">
+      <h3>Custom Quilting</h3>
+      <p class="price">${{ printf "%.2f" .Site.Params.priceCustomPerSqIn }}<span class="price-unit"> / sq in</span></p>
+      <p>Designs chosen for your quilt — borders, blocks, and background fills planned to feature your piecing.</p>
     </article>
     <article class="price-card">
       <h3>Sew-On Binding</h3>
@@ -22,7 +27,7 @@
     </article>
   </div>
   <p class="pricing-note">
-    <strong>How to estimate:</strong> multiply your quilt's width × length in inches, then divide by 1,296 (the number of square inches in a square yard).
-    Example: a 60" × 80" quilt is about 3.7 sq yd, so ~$1.11 to quilt.
+    <strong>How to estimate:</strong> multiply your quilt's width × length in inches.
+    Example: a 60" × 80" quilt is 4,800 sq in, so <strong>${{ printf "%.0f" (mul .Site.Params.priceEdgeToEdgePerSqIn 4800) }}</strong> edge-to-edge or <strong>${{ printf "%.0f" (mul .Site.Params.priceCustomPerSqIn 4800) }}</strong> custom.
   </p>
 </section>

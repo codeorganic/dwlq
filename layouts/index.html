@@ -18,8 +18,8 @@
       <p>Free-motion longarm experience, with time on the floor at local quilt shops too.</p>
     </li>
     <li>
-      <h2>${{ printf "%.2f" .Site.Params.pricePerSqYd }} / sq yd</h2>
-      <p>All free-motion quilting. Add sew-on binding for ${{ printf "%.0f" .Site.Params.bindingAddOn }}.</p>
+      <h2>From ${{ printf "%.2f" .Site.Params.priceEdgeToEdgePerSqIn }}/sq in</h2>
+      <p>Edge-to-edge from ${{ printf "%.2f" .Site.Params.priceEdgeToEdgePerSqIn }}, custom from ${{ printf "%.2f" .Site.Params.priceCustomPerSqIn }} — both all free-motion.</p>
     </li>
     <li>
       <h2>&lt; {{ .Site.Params.turnaroundDays }}-day turnaround</h2>
@@ -27,7 +27,7 @@
     </li>
     <li>
       <h2>Intro pricing</h2>
-      <p>First three quilts get a special rate while I build out the portfolio.</p>
+      <p>First three quilts get a special rate.</p>
     </li>
   </ul>
 </section>

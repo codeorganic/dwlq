@@ -1,6 +1,6 @@
 # dunnwithlovequilting.com
 
-Static website for **Dunn With Love Quilting** — free-motion longarm quilting in Des Moines, WA.
+Static website for **Dunn With Love Quilting** — free-motion longarm quilting in Des Moines, WA. Edge-to-edge from $0.03/sq in, custom from $0.10/sq in.
 
 Built with [Hugo](https://gohugo.io) and deployed to GitHub Pages on the custom domain `dunnwithlovequilting.com`.
 
