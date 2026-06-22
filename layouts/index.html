@@ -3,7 +3,6 @@
   <div class="container hero-inner">
     <h1>{{ .Site.Title }}</h1>
     <p class="hero-tagline">{{ .Site.Params.tagline }}</p>
-    <p class="hero-sub">All free-motion. Currently booking with a turnaround of less than {{ .Site.Params.turnaroundDays }} days.</p>
     <p class="hero-actions">
       <a class="btn btn-primary" href="/contact/">Request quilting time</a>
       <a class="btn btn-link" href="/services/">See pricing</a>
@@ -14,16 +13,20 @@
 <section class="highlights container">
   <ul class="highlights-grid">
     <li>
-      <h2>All free-motion</h2>
-      <p>Edge-to-edge and custom designs, every quilt treated like it belongs to a friend.</p>
+      <h2>Hand Guided free-motion</h2>
+      <p>Edge-to-edge and custom designs. No robotics.</p>
     </li>
     <li>
-      <h2>From ${{ printf "%.2f" .Site.Params.priceEdgeToEdgePerSqIn }}/sq in</h2>
-      <p>Edge-to-edge from ${{ printf "%.2f" .Site.Params.priceEdgeToEdgePerSqIn }}, custom from ${{ printf "%.2f" .Site.Params.priceCustomPerSqIn }} — both free-motion.</p>
+      <h2>Edge-to-Edge ${{ printf "%.2f" .Site.Params.priceEdgeToEdgePerSqIn }}/sq in</h2>
+      <p>Hand guided edge-to-edge designs that add textures to you quilt.</p>
+    </li>
+    <li>
+      <h2>Custom Quilting ${{ printf "%.2f" .Site.Params.priceCustomPerSqIn }}/sq in</h2>
+      <p>Custom quilting adds a special touch to help blocks pop, helps appliqué stand out, and brings dimension to your embroidery.</p>
     </li>
     <li>
       <h2>Under {{ .Site.Params.turnaroundDays }} days</h2>
-      <p>Current turnaround. Your quilt isn't sitting in a queue for months.</p>
+      <p>Your quilt isn't sitting in a queue for months.</p>
     </li>
     <li>
       <h2>Intro pricing</h2>
